@@ -1,0 +1,48 @@
+general:
+  grab_resolution: 0 # The native camera grab resolution. 0->960x600, 1->1920x1080, 2->1920x1200 
+  grab_frame_rate: 1 # ZED SDK internal grabbing rate. 0->15, 1->30, 2->60, 3->120
+  unit_mode: 0 # ZED SDK internal unit mode, 0->MILLIMETER, 1->CENTIMETER, 2->METER
+  coordinate_system: 2 # ZED SDK internal coordinate system, 0->IMAGE, 1->LEFT_HANDED_Y_UP, 2->RIGHT_HANDED_Y_UP, 3->RIGHT_HANDED_Z_UP, 4->LEFT_HANDED_Z_UP, 5->RIGHT_HANDED_Z_UP_X_FWD
+
+video:
+  exposure_time: 16000 # Defines the real exposure time in microseconds. Recommended to control manual exposure (instead of `video.exposure` setting)
+  auto_exposure_time_range_min: 28 # Defines the minimum range of exposure auto control in micro seconds
+  auto_exposure_time_range_max: 30000 # Defines the maximum range of exposure auto control in micro seconds
+  exposure_compensation: 50 # Defines the Exposure-target compensation made after auto exposure. Reduces the overall illumination target by factor of F-stops. Values range is [0 - 100]. Default value is 50, i.e. no compensation applied
+  analog_gain: 1255 # Defines the real analog gain (sensor) in mDB. Range [1000-16000]. Recommended to control manual sensor gain (instead of `video.gain` setting)
+  auto_analog_gain_range_min: 1000 # Defines the minimum range of sensor gain in automatic control
+  auto_analog_gain_range_max: 16000 # Defines the maximum range of sensor gain in automatic control
+  digital_gain: 1 # Defines the real digital gain (ISP) as a factor. Range [1-256]. Recommended to control manual ISP gain (instead of `video.gain` setting)
+  auto_digital_gain_range_min: 1 # Defines the minimum range of digital ISP gain in automatic control
+  auto_digital_gain_range_max: 256 # Defines the maximum range of digital ISP gain in automatic control
+  denoising: 50 # Defines the level of denoising applied on both left and right images. Range [0-100]
+
+depth:
+  format: 0 # Depth output format. 0->FLOAT_VECTOR, 1->BGRA_IMAGE
+  mode: 0 # Depth mode. 0->NONE, 1->PERFORMANCE, 2->QUALITY, 3->ULTRA, 4->NEURAL, 5->NEURAL_PLUS
+  min_depth: 2.0 # Min: 0.3, Max: 3.0
+  max_depth: 10.0 # Max: 20.0
+
+confidence:
+  format: 0 # Confidence output format. 0->FLOAT_VECTOR, 1->BGRA_IMAGE
+  threshold: 80 # Confidence threshold
+
+pointcloud:
+  format: 0 # Pointcloud output format. 0->XYZ, 1->XYZ_RGB
+
+object_detection:
+  model: 0 #0->MULTI_CLASS_BOX_FAST, 1->MULTI_CLASS_BOX_MEDIUM, 2->MULTI_CLASS_BOX_ACCURATE
+  allow_reduced_precision_inference: true # Allow inference to run at a lower precision to improve runtime and memory usage
+  max_range: 20.0 # [m] Defines a upper depth range for detections
+  confidence_threshold: 75.0 # [DYNAMIC] - Minimum value of the detection confidence of an object [0,99]
+  prediction_timeout: 0.5 # During this time [sec], the object will have OK state even if it is not detected. Set this parameter to 0 to disable SDK predictions
+  enable_tracking: true # Defines if the object detection will track objects across images flow
+  enable_segmentation: true # compute a binary mask for each object aligned on the left image
+  filtering_mode: 1 # '0': NONE - '1': NMS3D - '2': NMS3D_PER_CLASS
+  mc_people: true # [DYNAMIC] - Enable/disable the detection of persons for 'MULTI_CLASS_X' models
+  mc_vehicle: true # [DYNAMIC] - Enable/disable the detection of vehicles for 'MULTI_CLASS_X' models
+  mc_bag: true # [DYNAMIC] - Enable/disable the detection of bags for 'MULTI_CLASS_X' models
+  mc_animal: true # [DYNAMIC] - Enable/disable the detection of animals for 'MULTI_CLASS_X' models
+  mc_electronics: true # [DYNAMIC] - Enable/disable the detection of electronic devices for 'MULTI_CLASS_X' models
+  mc_fruit_vegetable: true # [DYNAMIC] - Enable/disable the detection of fruits and vegetables for 'MULTI_CLASS_X' models
+  mc_sport: true # [DYNAMIC] - Enable/disable the detection of sport-related objects for 'MULTI_CLASS_X' models 

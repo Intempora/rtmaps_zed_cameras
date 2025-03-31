@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<build target="rtmaps" identifier="pck_rtmaps_zed_cameras" version="1.4" family="windows|linux|qnx" minMaintenance="">
+  <frompckinfo relative="xbs"><![CDATA[../rtmaps_zed_cameras.pckinfo]]></frompckinfo>
+  <content><!--
+      Short description (one liner) of the content of the archive. This text will be readable
+      from the update sites without downloading the whole archive. It should contain enough
+      information to understand what is the content of the archive as it will be used in the
+      updater GUI to describe the archive.
+    -->rtmaps_zed_cameras.pck</content>
+  <description><!--
+      Detailed description of the archive. This text will be readable from the update sites
+      without downloading the whole archive. It should contain enough information to
+      understand what is the content of the archive and to be able to successfully install
+      it. Therefore it should contain links to all of the external tools needed as well as their
+      installation procedures.
+    -->Zed Cameras</description>
+  <tags>
+    <!--
+      A tag is a word which describes the archive, its content or its context of use. It
+      can be used to filter search results. For example, all package archives will be
+      tagged "package" by default (when the build script is generated from a package).
+      The tag list should also contain keywords indicating the archive content licensing
+      and possible external library or binary dependencies.
+
+      A tag is specified using the folowing syntax:
+
+        <tag keyword="..." />
+
+    -->
+    <tag keyword="package"/>
+    <tag keyword="ZED"/>
+    <tag keyword="Stereolabs"/>
+    <tag keyword="sensor"/>
+  </tags>
+  <changelog>
+     <release version="1.0.0" date="20250108" maintenance="20250108">
+      <group>
+        <module type="component" name="zed_cameras" version="1.0.0" history="new"/>
+        <entry type="add" breaking="no">
+          <![CDATA[
+            First version of the component using zed SDK v4.2 and cuda 12.
+          ]]>
+        </entry>
+      </group>
+    </release>
+  </changelog>
+  <!--
+      An additionnal icon can be provided using the folowing syntax:
+
+        <icon><![CDATA[/path/to/file]]></icon>
+
+      This icon must be a 64 * 64 PNG file. It will be shown in the
+      updater GUI next to the archive description.
+    -->
+  <dependencies>
+    <!--
+      A dependency is necessarily another RTMaps redistributable module. It is specified using
+      the following syntax:
+
+        <dependency identifier="" minVersion="" maxVersion="" target="" os="" arch="" />
+
+      The identifier attribute is mandatory. minVersion should always be specified because its
+      abscence may lead to broken installations. maxVersion should not be used except when a new
+      major version of RTMaps is released and that it breaks backward compatibility.
+      The target, os and architecture attributes are optional. If they are not specified, the
+      script uses those specified in the <build> node. You may also use the keyword "inherit"
+      to achieve the same behavior.
+
+      Note: package archives should always depend on at least a runtime archive.
+    -->
+    <dependency target="inherit" identifier="runtime" minVersion="4.0.0" os="inherit" arch="inherit"/>
+  </dependencies>
+  <install>
+    <!--
+      The content of this node represents RTMaps file hierarchy. It can contain two types of nodes:
+
+        <file><![CDATA[/path/to/file]]></file>
+        <folder name="folder_name">...</folder>
+
+      The file path is relative to the build script location. A folder can contain multiple instancies
+      of folder and file. When the archive is installed, the folders that do not exist are created.
+      Files that already exist are overwritten only when the redistributable file is newer than the
+      existing file (the definition of newer being the greatest version number if any, otherwise the
+      file with the most recent modification date).
+
+      The executables must be flagged as follows:
+
+        <file executable="true"><![CDATA[/path/to/executable]]></file>
+
+      It is recommended to flag all executables because it is used by the installation command to set
+      corresponding access rights. If this attribute is not specified, the default value is false.
+
+      You can also use the <find> tag to specify a file search query that will be used to fill the
+      parent directory of the hierarchy:
+
+        <find recursive="true" empty_folders="false">
+          <parent><![CDATA[/path/to/parent/folder]]></parent>
+          <match apply_to_folder="false"><![CDATA[regular expression]]></match>
+          <match apply_to_file="false" exclude="true"><![CDATA[regular expression]]></match>
+          <match_executable><![CDATA[regular expression]]></match_executable>
+        </find>
+
+     The <parent> node is mandatory and contain the relative path to the root search path.
+     The <match> node specifies a search criterion as a perl regular expression. There can be multiple
+     <match> nodes in which case all of them must be valid for a file to be included in the archive. By
+     default a <match> node applies to files and folders. You can use the apply_to_file and / or
+     apply_to_folder attributes to disable the criterion for a selected kind of element.
+     When the exclude attribute of the <match> node is set to true, the element must NOT match the
+     regexp to be considered as valid. This can be used to exclude subversion configuration files for
+     example.
+     Search is not performed recursively by default. You have to set the recursive attribute of the
+     <find> node to true when this is needed. Please note that even in recursive mode all folders on your
+     files paths must be valid according to search criteria by default.
+     Empty folder hierarchies are pruned from the resulting search tree by default. You can set the
+     empty_folder attribute of the <find> node to true if you wish to force their inclusion.
+     The <match_executable> tag can be used to specify which files in the search results must be
+     considered as executables.
+
+     Both <file> and <find> nodes also accept the relative attribute which can have three values:
+       * "xbs": the path is relative to the script parent directory
+       * "execute": the path is relative to the execute directory
+       * "source": the path is relative to the source directory
+
+     There is also a Linux specific node available to handle symbolic links:
+
+       <symlink name="symlink_name"><![CDATA[/path/to/symbolic/link/target]]></symlink>
+
+     Please note that relative symbolic link targets are considered based on the symbolic link location
+     (not the installation directory).
+    -->
+    <folder name="packages">
+      <folder name="rtmaps_zed_cameras">
+
+        <file relative="execute" executable="true"><![CDATA[packages/rtmaps_zed_cameras/rtmaps_zed_cameras.pck]]></file>
+        <file relative="execute" executable="false"><![CDATA[packages/rtmaps_zed_cameras/README.txt]]></file>
+        <file relative="execute" executable="false"><![CDATA[packages/rtmaps_zed_cameras/zedx.yaml]]></file>
+
+        <folder name="doc">
+          <find relative="source" recursive="true" empty_folders="false">
+            <parent><![CDATA[doc]]></parent>
+            <match executable="false"><![CDATA[.*]]></match>
+          </find>
+        </folder>
+
+      </folder>
+    </folder>
+
+  </install>
+  <sources>
+    <!--
+      The content of this node represents a file hierarchy. It works the same way as the <install>
+      node. The main goal of this hierarchy is to be able to package sources files with (or without)
+      the binaries. The sources are not extracted when the package is installed. The package can be
+      opened with any Zip archive reader.
+    -->
+  </sources>
+  <scripts>
+    <!--
+      The <scripts> node makes you able to specify command lines that will be executed during the
+      installation of the archive. It consists in a file hierarchy (see <install> node for details)
+      and a list of <script> nodes:
+
+        <file><![CDATA[/path/to/script.bat]]></file>
+
+        <script stage="...">
+          <arg><![CDATA[echo]]></arg>
+          <arg><![CDATA[foo]]></arg>
+          <arg><![CDATA[bar]]></arg>
+          <arg><![CDATA[baz]]></arg>
+        </script>
+
+      The stage attribute tells when the script will be executed. Two values are possible:
+        - "preinstall" will execute the script before extracting the content of the archive.
+        - "postinstall" will execute the script after extracting the content of the archive.
+
+      The pre-install scripts are usually used to check preconditions independent from RTMaps (for
+      example when the archive contains a package which depends on external programs like a perl
+      interpreter). As this is made to check preconditions, the script is supposed to return 0
+      when everything went fine and anything else otherwise.
+
+      The post-install scripts are made to deploy system dependent stuffs (for example registering
+      a COM server).
+
+      Multiple scripts for the same stage can be specified, they will be executed in the same order
+      as they are declared in the <scripts> node. As for pre-install scripts, all scripts must
+      succeed in order to start the installation.
+
+      When the installation starts the script hierarchy is fully extracted from the archive to a
+      temporary folder. This folder is set as the current directory and is stored in the
+      RTMAPS_SCRIPTDIR environment variable. The installation directory is stored in the
+      RTMAPS_INSTALLDIR environment variable. Note: the environment used during the installation
+      is temporary and is reinitialized between each script execution. Do not try to use the
+      environment variables to communicate data between scripts.
+
+      Please note that:
+      * the environment used during the installation is temporary and is reinitialized between
+        each script execution. Do not try to use the environment variables to communicate data
+        between scripts.
+      * the scripts are not executed using a shell therefore the arguments specified in the
+        <arg> nodes will be directly copied to argv. If you really need some kind of environment
+        variable substitution, do it directly in your script.
+    -->
+  </scripts>
+</build>

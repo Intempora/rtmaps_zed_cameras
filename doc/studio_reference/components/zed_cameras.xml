@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentResources xmlns="http://schemas.intempora.com/RTMaps/2011/ComponentResources" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="zed_cameras" xsi:noNamespaceSchemaLocation="http://www.intempora.com/schemas/RTMaps/2011/ComponentResources.xsd">
+    <Type>Component</Type>
+    <IconFile></IconFile>
+    <Lang lang="ENG">
+        <GroupName>Sensor</GroupName>
+        <Documentation>
+            <Component>
+                <Alias>Zed Cameras</Alias>
+                <Description>
+                    <span><![CDATA[<p>This component allows to use stereolabs ZED cameras.]]></span>
+                </Description>
+            </Component>
+
+            <Property MAPSName="use_multithread">
+                <Alias>Use multithread</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Enable multithread to retrieve data from ZED SDK, it's an experimental feature.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Property>
+            <Property MAPSName="configuration_file_path">
+                <Alias>Config file path</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Path to the .yaml configuration file.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Property>
+            <Property MAPSName="resolution">
+                <Alias>Resolution</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Camera resolution.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Property>
+            <Property MAPSName="fps">
+                <Alias>FPS</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Camera fps.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Property>
+            <Property MAPSName="unit">
+                <Alias>Unit</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Unit for pointcloud.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Property>
+            
+
+            <Output MAPSName="calibration_parameters">
+                <Alias>Calibration parameters</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Output for calibration parameters.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Output>
+            <Output MAPSName="left_image">
+                <Alias>Left image</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Output for left image.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Output>
+            <Output MAPSName="right_image">
+                <Alias>Right image</Alias>
+                <Description>
+                    <span>
+                    <![CDATA[
+                        <p>Output for right image.</p>
+                    ]]>
+                    </span>
+                </Description>
+            </Output>
+            
+
+            <Input></Input>
+            
+        </Documentation>
+    </Lang>
+</ComponentResources>
